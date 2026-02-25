@@ -1,0 +1,30 @@
+---
+- name: "Packages For Fedora WSL"
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+    - name: "Update DNF cache and install Development Tools"
+      dnf:
+        name: "@Development Tools"
+        state: present
+        update_cache: true 
+    - name: "Install packages"
+      dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - ncurses
+        - git
+        - tmux
+        - htop
+        - neovim
+        - zsh
+        - zsh-syntax-highlighting
+        - curl
+        - openssh
+        - jq
+        - k9s
+        - cmake
+
