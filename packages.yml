@@ -28,3 +28,17 @@
         - k9s
         - cmake
 
+    - name: "Change default shell to zsh"
+      user:
+        name: "{{ lookup('env', 'USER') }}"
+        shell: /bin/zsh
+
+    - name: "Install Oh My Zsh"
+      shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      args:
+        creates: ~/.oh-my-zsh
+      environment:
+        RUNZSH: 'no'
+        CHSH: 'no'
+      become: false
+
