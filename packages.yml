@@ -36,3 +36,17 @@
         RUNZSH: 'no'
         CHSH: 'no'
       become: false
+
+    - name: "Install zsh-autosuggestions plugin"
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        depth: 1
+      become: false
+
+    - name: "Install zsh-vi-mode plugin"
+      git:
+        repo: https://github.com/jeffreytse/zsh-vi-mode
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-vi-mode
+        depth: 1
+      become: false
