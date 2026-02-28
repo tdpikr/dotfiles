@@ -25,10 +25,14 @@
         - helm
         - yq
 
-    - name: "Change default shell to zsh"
+    - name: "Configure user, shell, and generate SSH key"
       user:
         name: "{{ lookup('env', 'USER') }}"
         shell: /bin/zsh
+        generate_ssh_key: true
+        ssh_key_type: ed25519
+        ssh_key_file: .ssh/id_ed25519
+        ssh_key_comment: "{{ lookup('env', 'NAME') }} *autogen"
 
     - name: "Install Oh My Zsh"
       shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -52,3 +56,4 @@
         dest: ~/.oh-my-zsh/custom/plugins/zsh-vi-mode
         depth: 1
       become: false
+
