@@ -11,6 +11,8 @@
         state: present
       loop:
         - ncurses
+        - curl
+        - openssh
         - git
         - tmux
         - htop
@@ -18,10 +20,10 @@
         - neovim
         - zsh
         - zsh-syntax-highlighting
-        - curl
-        - openssh
         - jq
         - k9s
+        - helm
+        - yq
 
     - name: "Change default shell to zsh"
       user:
