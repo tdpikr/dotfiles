@@ -5,11 +5,6 @@
   become: true
 
   tasks:
-    - name: "Update DNF cache and install Development Tools"
-      dnf:
-        name: "@Development Tools"
-        state: present
-        update_cache: true 
     - name: "Install packages"
       dnf:
         name: "{{ item }}"
@@ -19,6 +14,7 @@
         - git
         - tmux
         - htop
+        - btop
         - neovim
         - zsh
         - zsh-syntax-highlighting
@@ -26,7 +22,6 @@
         - openssh
         - jq
         - k9s
-        - cmake
 
     - name: "Change default shell to zsh"
       user:
@@ -41,4 +36,3 @@
         RUNZSH: 'no'
         CHSH: 'no'
       become: false
-
