@@ -25,6 +25,22 @@
         - helm
         - yq
         - openssl
+        - uv
+        - golang
+
+    - name: "Install Adoptium Java Repository"
+      dnf:
+        name: adoptium-temurin-java-repository
+        state: present
+
+    - name: "Enable Fedora third-party repositories"
+      command: fedora-third-party enable
+      changed_when: false
+
+    - name: "Install Temurin 17 JDK"
+      dnf:
+        name: temurin-17-jdk
+        state: present
 
     - name: "Configure user, shell, and generate SSH key"
       user:
