@@ -24,6 +24,7 @@
         - k9s
         - helm
         - yq
+        - openssl
 
     - name: "Configure user, shell, and generate SSH key"
       user:
@@ -67,3 +68,11 @@
     - name: "Install tmux plugins"
       command: ~/.tmux/plugins/tpm/bin/install_plugins
       become: false
+
+    - name: "Install kubectl"
+      shell: |
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+      args:
+        creates: /usr/local/bin/kubectl
+        chdir: /tmp
