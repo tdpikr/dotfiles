@@ -52,6 +52,17 @@ function sudo {
   fi
 }
 
+# View all git activity across subdirectories for today
+workday() {
+    find . -maxdepth 2 -name ".git" -type d -execdir sh -c '
+        output=$(git log --all --oneline --color=always --committer="$(git config user.name)" --since="00:00:00")
+        if [ -n "$output" ]; then
+            printf "\n\033[1;34mRepo: %s\033[0m\n" "$(basename "$PWD")"
+            echo "$output"
+        fi
+    ' \;
+}
+
 # Tmux config
 export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
 alias tmux='tmux -u'
